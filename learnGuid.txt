@@ -1,0 +1,35 @@
+//Handle file uploads & Multipart Data
+app.use(multer({
+  dest: './public/images/uploads' // where uploaded images goes
+}));
+
+// express session
+app.use(session({
+  secret: 'secret',
+  saveUninitialized: true,
+  resave : true
+});)
+
+// express validator
+app.use(expressValidator({
+  errorFormatter : function(param, msg, value){
+    var namespace = param.split("."),
+    root = namespace.shift(),
+    formParam = root;
+    while(namespace.length){
+      formParam += '[' + message.shift() + ']';
+    }
+    return{
+      param : formParam.
+      msg : msg,
+      value : value
+    };
+  }
+}));
+
+// connct flash
+app.use(flash());
+app.use(function(res, req, next){
+  res.locals.messages = require('express-messages')(req,res);
+  next();
+});
