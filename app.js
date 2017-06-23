@@ -4,12 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
-var session = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var db = require('monk')('localhost/nodeblog');
 var multer = require('multer');
 var flash = require('connect-flash');
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -58,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // connct flash
 app.use(flash());
-app.use(function(res, req, next){
+app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req,res);
   next();
 });
