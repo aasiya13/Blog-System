@@ -11,7 +11,6 @@ var db = require('monk')('localhost/nodeblog');
 var multer = require('multer');
 var flash = require('connect-flash');
 
-
 var index = require('./routes/index');
 var posts = require('./routes/posts');
 
